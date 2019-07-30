@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwadee.rsgl.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.hwadee.rsgl.model.Employee">
+    <constructor>
+      <idArg column="employee_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="employee_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="entry_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="position" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="major" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone_number" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="mail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="location" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="file" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="salary" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_name, entry_time, position, major, telephone_number, mail, 
+    location, file, salary, gender, password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee (employee_id, employee_name, entry_time, 
+      position, major, telephone_number, 
+      mail, location, file, 
+      salary, gender, password
+      )
+    values (#{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, #{entryTime,jdbcType=DATE}, 
+      #{position,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{telephoneNumber,jdbcType=CHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="file != null">
+        file,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    <set>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        file = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=DATE},
+      position = #{position,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      file = #{file,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.hwadee.rsgl.model.Employee">
+    <constructor>
+      <idArg column="employee_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="employee_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="entry_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="position" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="major" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone_number" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="mail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="location" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="file" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="salary" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="gender" javaType="java.lang.Object" jdbcType="ARRAY" />
+      <arg column="password" javaType="java.lang.Object" jdbcType="ARRAY" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_name, entry_time, position, major, telephone_number, mail, 
+    location, file, salary, gender, password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee (employee_id, employee_name, entry_time, 
+      position, major, telephone_number, 
+      mail, location, file, 
+      salary, gender, password
+      )
+    values (#{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, #{entryTime,jdbcType=DATE}, 
+      #{position,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{telephoneNumber,jdbcType=CHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{gender,jdbcType=ARRAY}, #{password,jdbcType=ARRAY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="file != null">
+        file,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=ARRAY},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=ARRAY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    <set>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        file = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=ARRAY},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=ARRAY},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=DATE},
+      position = #{position,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      file = #{file,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=ARRAY},
+      password = #{password,jdbcType=ARRAY}
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.hwadee.rsgl.model.Employee">
+    <constructor>
+      <idArg column="employee_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="employee_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="entry_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="position" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="major" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone_number" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="mail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="location" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="file" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="salary" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="gender" javaType="java.lang.Object" jdbcType="ARRAY" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_name, entry_time, position, major, telephone_number, mail, 
+    location, file, salary, gender
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee (employee_id, employee_name, entry_time, 
+      position, major, telephone_number, 
+      mail, location, file, 
+      salary, gender)
+    values (#{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, #{entryTime,jdbcType=DATE}, 
+      #{position,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{telephoneNumber,jdbcType=CHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{gender,jdbcType=ARRAY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hwadee.rsgl.model.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="file != null">
+        file,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=ARRAY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    <set>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNumber != null">
+        telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null">
+        file = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=ARRAY},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hwadee.rsgl.model.Employee">
+    update employee
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=DATE},
+      position = #{position,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      telephone_number = #{telephoneNumber,jdbcType=CHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      file = #{file,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=ARRAY}
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </update>
+</mapper>
