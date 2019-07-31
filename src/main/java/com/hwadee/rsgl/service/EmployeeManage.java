@@ -1,6 +1,8 @@
 package com.hwadee.rsgl.service;
 
 import com.hwadee.rsgl.model.Employee;
+import com.hwadee.rsgl.model.MajorChage;
+import com.hwadee.rsgl.model.PositionChage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,4 +14,7 @@ public interface EmployeeManage {
 	Employee infoCheck(int employeeId);
 	void infoChange(Employee employee);
 	void majorSet(Employee employee);
+	void passwordChange(Employee employee);
+	void positionChange(PositionChage positionChage);
+	void majorChange(MajorChage majorChage);
 }

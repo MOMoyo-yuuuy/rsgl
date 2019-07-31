@@ -1,5 +1,8 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+
+<div>
+	<a href="/rsgl/enter">进入</a>
+</div>
 </body>
 </html>
