@@ -1,5 +1,7 @@
 package com.hwadee.rsgl.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,5 +104,9 @@ public class EmployeeManageImpl implements EmployeeManage {
 	
 	public void majorChange(MajorChage majorChage) {
 		majorChageMapper.insert(majorChage);
+	}
+	
+	public List<MajorChage> positionChangeCheck() {
+		return majorChageMapper.selectAll();
 	}
 }

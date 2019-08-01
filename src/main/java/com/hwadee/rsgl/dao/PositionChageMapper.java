@@ -1,5 +1,7 @@
 package com.hwadee.rsgl.dao;
 
+import java.util.List;
+
 import com.hwadee.rsgl.model.PositionChage;
 
 public interface PositionChageMapper {
@@ -14,4 +16,6 @@ public interface PositionChageMapper {
     int updateByPrimaryKeySelective(PositionChage record);
 
     int updateByPrimaryKey(PositionChage record);
+    
+    List<PositionChage> selectAll();
 }

@@ -1,5 +1,7 @@
 package com.hwadee.rsgl.dao;
 
+import java.util.List;
+
 import com.hwadee.rsgl.model.Employee;
 
 public interface EmployeeMapper {
@@ -14,4 +16,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+    
+    List<Employee> selectAll();
 }

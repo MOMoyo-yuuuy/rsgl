@@ -1,5 +1,7 @@
 package com.hwadee.rsgl.dao;
 
+import java.util.List;
+
 import com.hwadee.rsgl.model.MajorChage;
 
 public interface MajorChageMapper {
@@ -14,4 +16,6 @@ public interface MajorChageMapper {
     int updateByPrimaryKeySelective(MajorChage record);
 
     int updateByPrimaryKey(MajorChage record);
+    
+    List<MajorChage> selectAll();
 }

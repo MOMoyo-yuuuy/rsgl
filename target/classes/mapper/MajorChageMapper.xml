@@ -13,6 +13,9 @@
   <sql id="Base_Column_List">
     number, employee_id, employee_name, old_major, new_major
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+	select * from major_chage
+</select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -24,9 +27,9 @@
     where number = #{number,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hwadee.rsgl.model.MajorChage">
-    insert into major_chage (number, employee_id, employee_name, 
+    insert into major_chage ( employee_id, employee_name, 
       old_major, new_major)
-    values (#{number,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, 
+    values (#{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, 
       #{oldMajor,jdbcType=VARCHAR}, #{newMajor,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hwadee.rsgl.model.MajorChage">

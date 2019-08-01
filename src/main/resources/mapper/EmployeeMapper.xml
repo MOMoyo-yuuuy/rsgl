@@ -21,6 +21,9 @@
     employee_id, employee_name, entry_time, position, major, telephone_number, mail, 
     location, file, salary, gender, password
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+	select * from employee
+</select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

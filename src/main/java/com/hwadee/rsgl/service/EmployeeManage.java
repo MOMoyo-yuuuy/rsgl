@@ -4,6 +4,8 @@ import com.hwadee.rsgl.model.Employee;
 import com.hwadee.rsgl.model.MajorChage;
 import com.hwadee.rsgl.model.PositionChage;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hwadee.rsgl.dao.EmployeeMapper;
@@ -17,4 +19,5 @@ public interface EmployeeManage {
 	void passwordChange(Employee employee);
 	void positionChange(PositionChage positionChage);
 	void majorChange(MajorChage majorChage);
+	List<MajorChage> positionChangeCheck();
 }
