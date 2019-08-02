@@ -109,4 +109,24 @@ public class EmployeeManageImpl implements EmployeeManage {
 	public List<MajorChage> positionChangeCheck() {
 		return majorChageMapper.selectAll();
 	}
+	
+	public void leave(int employeeId) {
+		employeeMapper.deleteByPrimaryKey(employeeId);
+	}
+	public String positionResult(Employee employee) {
+		PositionChage positionChage=positionChageMapper.selectByEmployeeId(employee.getEmployeeId());
+		if(positionChage==null) {
+			return "请查看职位是否变更，变更则通过";
+		}else {
+			return "仍在审核";
+		}
+	}
+	public String majorResult(Employee employee) {
+		MajorChage majorChage=majorChageMapper.selectByEmployeeId(employee.getEmployeeId());
+		if(majorChage==null) {
+			return "请查看职位是否变更，变更则通过";
+		}else {
+			return "仍在审核";
+		}
+	}
 }

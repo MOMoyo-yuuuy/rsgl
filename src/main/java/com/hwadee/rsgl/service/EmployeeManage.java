@@ -20,4 +20,7 @@ public interface EmployeeManage {
 	void positionChange(PositionChage positionChage);
 	void majorChange(MajorChage majorChage);
 	List<MajorChage> positionChangeCheck();
+	void leave(int employeeId);
+	String positionResult(Employee employee);
+	String majorResult(Employee employee);
 }

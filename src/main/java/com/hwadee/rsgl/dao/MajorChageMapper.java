@@ -18,4 +18,6 @@ public interface MajorChageMapper {
     int updateByPrimaryKey(MajorChage record);
     
     List<MajorChage> selectAll();
+    
+    MajorChage selectByEmployeeId(int employeeId);
 }

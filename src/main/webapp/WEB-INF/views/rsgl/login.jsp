@@ -81,8 +81,8 @@
 								<div class="sele">
 								<span class="fa fa-user-o" aria-hidden="true"></span>
                                  性别：<select name="gender">			
-                                 	<option value="m" >男</option>			 
-                                 	<option value="w" selected>女</option>			
+                                 	<option value="男" >男</option>			 
+                                 	<option value="女" selected>女</option>			
                                  	</select>
                                  </div>
                                  <div class="sele">	

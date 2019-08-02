@@ -33,6 +33,10 @@ public class EmployeeController {
 	public String Enter() {
 		return "rsgl/login";
 	}
+	@RequestMapping(value="/infoupdateE",method=RequestMethod.GET)
+	public String infoupdateE() {
+		return "rsgl/infoupdate";
+	}
 	@RequestMapping(value="/registerE",method=RequestMethod.GET)
 	public String RegE() {
 		return "rsgl/register";
@@ -82,31 +86,51 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/presidentinfo",method=RequestMethod.GET)
-	public String presidentE(){
-		return "rsgl/presidentpanel";
-	}
-	
-	@RequestMapping(value="/showallemployeeinfo",method=RequestMethod.GET)
-	public String showallemployeeinfo(Model model) {
+	public String presidentpanel(Model model){
+		List<PositionChage> positionChages=presidentOpreation.positionChageAll();
+		model.addAttribute("positionChages",positionChages);
 		presidentOpreation.calculateSalary();
 		List<Employee> employees=presidentOpreation.showAllEmployeeInfo();
 		model.addAttribute("employees", employees);
-		return "rsgl/presidentshowallinfo";
+		return "rsgl/presidentpanel";
+		
+	}
+	@RequestMapping(value="/presidentinfo",method=RequestMethod.PUT)
+	public String presidentpasswordChange(HttpSession session,String newPassword) {
+		Employee employee=(Employee)session.getAttribute("employee");
+		employee.setPassword(newPassword);
+		session.setAttribute("employee", employee);
+		return "redirect:/presidentinfo";
 	}
 	
-	@RequestMapping(value="/showoneemployeeinfo",method=RequestMethod.GET)
+	@RequestMapping(value="/presidentinfo",method=RequestMethod.POST)
 	public String showOneEmployeeInfo(int employeeId,Model model) {
 		Employee employee=presidentOpreation.selectOneEmployeeInfo(employeeId);
 		model.addAttribute("employee",employee);
 		return "rsgl/presidentshowoneinfo";
 	}
 	
-	@RequestMapping(value="/positionchangecheck",method=RequestMethod.GET)
-	public String positionChangeCheck(Model model) {
-		List<PositionChage> positionChages=presidentOpreation.positionChageAll();
-		model.addAttribute("positionChages",positionChages);
-		return "rsgl/presidentchangecheck";
-	}
+//	@RequestMapping(value="/showallemployeeinfo",method=RequestMethod.GET)
+//	public String showallemployeeinfo(Model model) {
+//		presidentOpreation.calculateSalary();
+//		List<Employee> employees=presidentOpreation.showAllEmployeeInfo();
+//		model.addAttribute("employees", employees);
+//		return "rsgl/presidentshowallinfo";
+//	}
+	
+//	@RequestMapping(value="/showoneemployeeinfo",method=RequestMethod.GET)
+//	public String showOneEmployeeInfo(int employeeId,Model model) {
+//		Employee employee=presidentOpreation.selectOneEmployeeInfo(employeeId);
+//		model.addAttribute("employee",employee);
+//		return "rsgl/presidentshowoneinfo";
+//	}
+	
+//	@RequestMapping(value="/positionchangecheck",method=RequestMethod.GET)
+//	public String positionChangeCheck(Model model) {
+//		List<PositionChage> positionChages=presidentOpreation.positionChageAll();
+//		model.addAttribute("positionChages",positionChages);
+//		return "rsgl/presidentchangecheck";
+//	}
 	
 	@RequestMapping(value="/positionchangecheck",method=RequestMethod.DELETE)
 	public String positionChangeCheck(int number,int judge) {
@@ -119,7 +143,13 @@ public class EmployeeController {
 	public String login(int employeeId, String password,HttpSession session) {
 		Employee employee=employeeManage.login(employeeId, password);
 		session.setAttribute("employee", employee);
-		return "rsgl/personinfo";
+		if(employee.getPosition()!=null&&employee.getPosition().equals("president")) {
+			return "redirect:/presidentinfo";
+		}else if(employee.getPosition()!=null&&employee.getPosition().equals("director")) {
+			return "redirect:/director";
+		}else {
+			return "redirect:/infocheck";
+		}
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
@@ -136,16 +166,22 @@ public class EmployeeController {
 		Employee employee=(Employee)session.getAttribute("employee");
 		Employee employee2=employeeManage.infoCheck(employee.getEmployeeId());
 		model.addAttribute("employee2",employee2);
-		return "rsgl/personinfocheck";
+		session.setAttribute("employee", employee2);
+		return "rsgl/personinfo";
 	}
 	
 	@RequestMapping(value="/infoupdate",method=RequestMethod.POST)
-	public String infoupdate(String password,HttpSession session,Model model) {
+	public String infoupdate(Employee employeeG,HttpSession session,Model model) {
 		Employee employee=(Employee)session.getAttribute("employee");
-		employee.setPassword(password);
-		employeeManage.infoChange(employee);
-		session.setAttribute("employee",employee);
-		model.addAttribute("employee",employee);
+		employeeG.setEmployeeId(employee.getEmployeeId());
+		employeeG.setEntryTime(employee.getEntryTime());
+		employeeG.setSalary(employee.getSalary());
+		employeeG.setMajor(employee.getMajor());
+		employeeG.setPosition(employee.getPosition());
+		employeeG.setPassword(employee.getPassword());
+		employeeManage.infoChange(employeeG);
+		session.setAttribute("employee",employeeG);
+		model.addAttribute("employee",employeeG);
 		return "redirect:/infocheck";
 	}
 	
@@ -171,5 +207,37 @@ public class EmployeeController {
 		majorChage.setNewMajor(major);
 		employeeManage.majorChange(majorChage);
 		return "redirect:/infocheck";
+	}
+	
+	@RequestMapping(value="/leave",method=RequestMethod.POST)
+	public String leave(int employeeId) {
+		employeeManage.leave(employeeId);
+		return "redirect:/login";
+	}
+	
+	@RequestMapping(value="/teacherpasswordchange",method=RequestMethod.POST)
+	public String teacherpasswordchange(String newPassword,HttpSession session) {
+		Employee employee=(Employee)session.getAttribute("employee");
+		employee.setPassword(newPassword);
+		employeeManage.passwordChange(employee);
+		session.setAttribute("employee", employee);
+		return "redirect:/infocheck";
+		
+	}
+	
+	@RequestMapping(value="/positionresult",method=RequestMethod.GET)
+	public String positionresult(Model model,HttpSession session ) {
+		Employee employee=(Employee)session.getAttribute("employee");
+		model.addAttribute("employeeId",employee.getEmployeeId());
+		model.addAttribute("result",employeeManage.positionResult(employee));
+		return "rsgl/positionresult";
+	}
+	
+	@RequestMapping(value="/majorresult",method=RequestMethod.GET)
+	public String majorresult(Model model,HttpSession session) {
+		Employee employee=(Employee)session.getAttribute("employee");
+		model.addAttribute("employeeId",employee.getEmployeeId());
+		model.addAttribute("result",employeeManage.majorResult(employee));
+		return "rsgl/majorresult";
 	}
 }

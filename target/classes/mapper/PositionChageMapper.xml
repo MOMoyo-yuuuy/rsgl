@@ -16,6 +16,12 @@
     <select id="selectAll" resultMap="BaseResultMap">
 	select * from position_chage
 </select>
+	<select id="selectByEmployeeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from position_chage
+    where employee_id = #{employeeId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

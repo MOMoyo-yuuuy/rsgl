@@ -18,4 +18,6 @@ public interface PositionChageMapper {
     int updateByPrimaryKey(PositionChage record);
     
     List<PositionChage> selectAll();
+    
+    PositionChage selectByEmployeeId(int employeeId);
 }
