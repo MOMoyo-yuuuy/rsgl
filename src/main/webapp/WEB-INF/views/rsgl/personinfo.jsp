@@ -96,8 +96,9 @@
     <form class="contact-forms wthree" action="/rsgl/positionchange" method="post">
      <div class="main-row">
                         <div  class="input" id="J" style="display: none">
+                        	<input type="hidden" name="position" value="assistant"/>
                             <p style="color:white">员工ID</p>
-                            <input type="text" id="name" placeholder="Name" name="employeeId" required="">
+                            <input type="text" id="name" placeholder="ID" name="employeeId" required="">
                             <div class="main-row">
                         <div class="input">
                             <p style="color:white">申请原因</p>
@@ -116,12 +117,13 @@
 
        
        <div class="main w3l">
-    <button id="P" type="headman" class="see">年级组长</button>
+    <button id="P" type="headman" class="see">年级主任</button>
     <form class="contact-forms wthree" action="/rsgl/positionchange" method="post">
      <div class="main-row">
                         <div  class="input"  id="M"  style="display: none">
+                        	<input type="hidden" name="position" value="director"/>
                             <p style="color:white">员工ID</p>
-                            <input type="text" id="name" placeholder="Name" name="employeeId" required="">
+                            <input type="text" id="name" placeholder="ID" name="employeeId" required="">
                             <div class="main-row">
                         <div class="input">
                             <p style="color:white">申请原因</p>
@@ -217,11 +219,11 @@
                         <label class="input select">
                             <select name="oldMajor">
                                 <option value="none" selected disabled="">原专业</option>
-                                <option value="Chinese">语文</option>
+                                <option value="chinese">语文</option>
                                 <option value="math">数学</option>
-                                <option value="English">英语</option>
-                                <option value="PE">体育</option>
-                                <option value="computer">计算机</option>
+                                <option value="english">英语</option>
+                                <option value="pe">体育</option>
+                                <option value="coding">计算机</option>
                             </select>
                             <i></i>
                         </label>
@@ -232,11 +234,11 @@
                         <label class="input select">
                             <select name="major">
                                 <option value="none" selected disabled="">新专业</option>
-                                <option value="Chinese">语文</option>
+                                <option value="chinese">语文</option>
                                 <option value="math">数学</option>
-                                <option value="English">英语</option>
-                                <option value="PE">体育</option>
-                                <option value="computer">计算机</option>
+                                <option value="english">英语</option>
+                                <option value="pe">体育</option>
+                                <option value="coding">计算机</option>
                             </select>
                             <i></i>
                         </label>

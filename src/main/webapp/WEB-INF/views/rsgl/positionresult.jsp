@@ -110,11 +110,11 @@ form#apply input[type=radio] {
 		<caption></caption>
 		<tr>
 			<th scope="row" abbr="name" class="spec">申请人ID</th>
-			<td>${sessionScope.employeeId }</td>
+			<td>${requestScope.employeeId }</td>
 		</tr>
 		<tr>
 			<th scope="row" abbr="result" class="specalt">申请结果</th>
-			<td class="alt">${sessionScope.result }</td>
+			<td class="alt">${requestScope.result }</td>
 		</tr>
 	</table>
 </body>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hwadee.rsgl.dao.ChineseMapper;
 import com.hwadee.rsgl.model.Employee;
 import com.hwadee.rsgl.model.MajorChage;
 import com.hwadee.rsgl.model.PositionChage;
@@ -63,15 +64,31 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/directorcheck",method=RequestMethod.GET)
 	public String directorcheck(Model model) {
-		
+		int[] check=directorOperation.vacancycheck();
+		model.addAttribute("check", check);
 		List<MajorChage> majorChages=directorOperation.majorChangeAll();
 		model.addAttribute("majorChages",majorChages);
-		return "rsgl/majorChageAllInfo";
+		
+		return "rsgl/directorpanel";
 	}
 	
 	@RequestMapping(value="/directorcheck",method=RequestMethod.DELETE)
 	public String directorcheck(int number,int judge) {
-		directorOperation.majorChangeCheck(number, judge);
+		
+		MajorChage majorChage=directorOperation.majorChangeCheck(number, judge);
+		return "redirect:/directorcheck";
+	}
+	
+	@RequestMapping(value="/directorcheck",method=RequestMethod.POST)
+	public String directorleave(int employeeId,String employeeName) {
+		employeeManage.leave(employeeId);
+		return "redirect:/login";
+	}
+	@RequestMapping(value="/directorcheck",method=RequestMethod.PUT)
+	public String directorpasswordchange(HttpSession session,String newPassword) {
+		Employee employee=(Employee)session.getAttribute("employee");
+		employee.setPassword(newPassword);
+		session.setAttribute("employee", employee);
 		return "redirect:/directorcheck";
 	}
 	
@@ -135,7 +152,7 @@ public class EmployeeController {
 	@RequestMapping(value="/positionchangecheck",method=RequestMethod.DELETE)
 	public String positionChangeCheck(int number,int judge) {
 		presidentOpreation.positionChangeCheck(number, judge);
-		return "redirect:/positionchangecheck";
+		return "redirect:/presidentinfo";
 	}
 	
 	
@@ -143,6 +160,9 @@ public class EmployeeController {
 	public String login(int employeeId, String password,HttpSession session) {
 		Employee employee=employeeManage.login(employeeId, password);
 		session.setAttribute("employee", employee);
+		if(employee==null) {
+			return "rsgl/defeat";
+		}
 		if(employee.getPosition()!=null&&employee.getPosition().equals("president")) {
 			return "redirect:/presidentinfo";
 		}else if(employee.getPosition()!=null&&employee.getPosition().equals("director")) {

@@ -20,7 +20,14 @@
 <link href="president/assets/css/style.css" rel="stylesheet"
 	type="text/css" media="all" />
 <link rel="stylesheet" href="president/assets/css/templatemo-style.css">
-
+<style type="text/css">
+.change {
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 14px;
+	margin-right: 5px;
+}
+</style>
 </head>
 <body>
 
@@ -59,7 +66,7 @@
 
 									<input type="text" id="first_name" name="employeeName"
 										placeholder="First name"
-										value="${requestScope.employee.employeeId }" required="">
+										value="${sessionScope.employee.employeeId }" required="">
 								</div>
 							</div>
 
@@ -70,14 +77,14 @@
 								<div class="input">
 
 									<input type="email" placeholder="Email" id="email" name="mail"
-										value="${requestScope.employee.mail }" required="">
+										value="${sessionScope.employee.mail }" required="">
 								</div>
 							</div>
 							<div class="span6 main-row">
 								<div class="input">
 
 									<input type="text" placeholder="Phone" id="phone" name="phone"
-										value="${requestScope.employee.telephoneNumber }" required="">
+										value="${sessionScope.employee.telephoneNumber }" required="">
 								</div>
 							</div>
 						</div>
@@ -87,7 +94,7 @@
 								<div class="input">
 
 									<input type="text" id="city" placeholder="gender" name="gender"
-										value="${requestScope.employee.gender }" required="">
+										value="${sessionScope.employee.gender }" required="">
 								</div>
 							</div>
 
@@ -98,7 +105,7 @@
 								<div class="input">
 
 									<input type="text" id="city" placeholder="salary" name="salary"
-										value="${requestScope.employee.salary }" required="">
+										value="${sessionScope.employee.salary }" required="">
 								</div>
 							</div>
 
@@ -108,7 +115,7 @@
 							<div class="input">
 
 								<input type="text" id="address" placeholder="Address"
-									name="address" value="${requestScope.employee.location }"
+									name="address" value="${sessionScope.employee.location }"
 									required="">
 							</div>
 						</div>
@@ -129,24 +136,24 @@
 
 			<h1 class="header-w3ls">quiry form</h1>
 			<div class="appointment-w3">
-				<form action="#" method="post">
+				<form action="/rsgl/presidentinfo" method="post">
 
 					<div class="login-w3ls">
 						<div class="icons-agile">
 
-							<input type="text" name="employeeId" placeholder="Name">
+							<input type="text" name="employeeId" placeholder="员工ID">
 
 							<div class="clear"></div>
 						</div>
 						<div class="icons-agile ">
 
-							<input type="text" name="mail" placeholder="id" required="">
+							<input type="text" name="employeeName" placeholder="姓名" required="">
 
 							<div class="clear"></div>
 						</div>
 						<div class="icons-agile">
 
-							<input type="text" name="position" placeholder="position">
+							<input type="text" name="position" placeholder="职位">
 
 
 						</div>
@@ -192,11 +199,13 @@
 								<td><b>${a.employeeName }</b></td>
 								<td><b>${a.oldMajor }</b></td>
 								<td><b>${a.newMajor }</b></td>
-								<td><button class="button_agree">同意</button></td>
-								<td><button class="button_disagree">拒绝</button></td>
+								
+								<td><a href="/rsgl/positionchangecheck?number=${a.number}&_method=delete&judge=1" class="change">同意</a></td>
+								<td><a href="/rsgl/positionchangecheck?number=${a.number }&_method=delete&judge=0" class="change">拒绝</a></td>
 
 							</tr>
 						</c:forEach>
+
 
 
 					</tbody>
@@ -251,8 +260,7 @@
 						<h5>旧密码：</h5>
 					</div>
 					<div class="col-md-10" style="width: 30px">
-						<input type="hidden" name="_method" value="PUT" /> 
-						<input
+						<input type="hidden" name="_method" value="PUT" /> <input
 							name="oldPassword" type="text" class="form-control" required="">
 
 					</div>

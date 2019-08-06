@@ -31,15 +31,17 @@ public class PresidentOperationImpl implements PresidentOperation {
 		List<Employee> employees = employeeMapper.selectAll();
 		employees.forEach(employee -> {
 			int salarySum = 0;
-			if (employee.getPosition().equals("president")) {
-				salarySum += salary.getMaster();
+			if (employee.getPosition() == null) {
+				salarySum += 0;
 			} else if (employee.getPosition().equals("director")) {
 				salarySum += salary.getManager();
 			} else if (employee.getPosition().equals("teacher")) {
 				salarySum += salary.getTeacher();
+			} else if (employee.getPosition().equals("president")) {
+				salarySum += salary.getMaster();
 			}
-			if (employee.getMajor().equals("chinese")) {
-				salarySum += salary.getChinese();
+			if (employee.getMajor() == null) {
+				salarySum += 0;
 			} else if (employee.getMajor().equals("coding")) {
 				salarySum += salary.getCoding();
 			} else if (employee.getMajor().equals("pe")) {
@@ -48,6 +50,8 @@ public class PresidentOperationImpl implements PresidentOperation {
 				salarySum += salary.getMath();
 			} else if (employee.getMajor().equals("english")) {
 				salarySum += salary.getEnglish();
+			} else if (employee.getMajor().equals("chinese")) {
+				salarySum += salary.getChinese();
 			}
 			employee.setSalary(salarySum);
 			employeeMapper.updateByPrimaryKey(employee);
@@ -77,7 +81,7 @@ public class PresidentOperationImpl implements PresidentOperation {
 		if (judge == 1) {
 			Employee employee = new Employee();
 			employee = employeeMapper.selectByPrimaryKey(positionChage.getEmployeeId());
-			employee.setMajor(positionChage.getNewMajor());
+			employee.setPosition(positionChage.getNewMajor());
 			employeeMapper.updateByPrimaryKey(employee);
 		}
 		return positionChage;

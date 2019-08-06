@@ -49,6 +49,8 @@ public class EmployeeManageImpl implements EmployeeManage {
 
 	public Employee login(int employeeId, String password){
 		Employee employee = employeeMapper.selectByPrimaryKey(employeeId);
+		if(employee==null)
+			return null;
 		if (null == password || !employee.getPassword().equals(password)) {
 			throw new RuntimeException("账号或密码错误");
 		}else {

@@ -43,4 +43,5 @@ $(function() {
         // give active class to first link
         $($('nav a')[0]).addClass('active');
 
+
 })});
